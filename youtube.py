@@ -51,7 +51,7 @@ def getUnprocessedVideos():
 
     result = []
     try:
-        c.execute('SELECT videoid FROM videos WHERE processed = 0 ORDER BY dtadded asc LIMIT 1')
+        c.execute('SELECT videoid FROM videos WHERE processed = 0 ORDER BY dtadded asc')
         for row in c.fetchall():
             id = row['videoid']
             result.append(id)
@@ -144,6 +144,7 @@ def processVideos():
                         api = tweepy.API(auth)
                         api.update_status(status=tweet)
                         statusUpdated = True
+                        break
                     else:
                         print('too few views, or too few likes')
 
